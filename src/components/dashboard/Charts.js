@@ -296,6 +296,18 @@ const Charts = ({ period }) => {
                                                     return tooltipItem.yLabel;
                                                 }
                                             }
+                                        },
+                                        scales :{
+                                            xAxes: [{
+                                                ticks: {
+                                                   fontColor: "white",
+                                                }
+                                             }],
+                                             yAxes: [{
+                                                ticks: {
+                                                   fontColor: "white", 
+                                                }
+                                             }]
                                         }
                                     }
                                 }

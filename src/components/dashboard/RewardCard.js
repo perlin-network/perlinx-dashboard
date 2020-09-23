@@ -1,11 +1,6 @@
 import React, { useContext, useState, useMemo, useCallback, useEffect } from 'react';
 import styled from "styled-components"
 import { Row, Col, Button, ButtonGroup, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-// import {
-//     useWeb3React,
-//     UnsupportedChainIdError
-// } from "@web3-react/core";
-// import useWallet from "../../hooks/useWallet"
 
 import { SnapshotContext } from "../../hooks/useSnapshot"
 

@@ -18,14 +18,6 @@ import {
 } from 'reactstrap';
 import Logo from "../assets/PerlinX-Logo.svg";
 import { colors } from "../constants";
-import {
-    useWeb3React,
-    UnsupportedChainIdError
-} from "@web3-react/core";
-import { injected } from "../connector"
-import { truncate } from "../utils/string"
-import useWallet from "../hooks/useWallet"
-
 
 const Wrapper = styled.div`
     background-color: ${colors.cardBackground};
@@ -36,23 +28,11 @@ const connectorsByName = {
 };
 
 const Header = () => {
-    // Initialize Web3 wallet
-    const context = useWeb3React();
-    const {
-        connector,
-        library,
-        chainId,
-        account,
-        activate,
-        deactivate,
-        active,
-        error
-    } = context;
+    
 
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
-    const { connect } = useWallet()
 
     return (
         <Wrapper>
@@ -64,31 +44,7 @@ const Header = () => {
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            {/* <NavItem>
-                                <NavLink href="http://app.perlinx.finance/">
-                                    Go to app
-                                </NavLink>
-                            </NavItem>
-                            {account
-                                ?
-                                <Button
-                                    style={{ 
-                                        marginLeft: 20,
-                                        cursor: "default"
-                                    }}
-                                    color="info"
-                                    outline
-                                >
-                                    {truncate(account)}
-                                </Button>
-                                :
-                                <Button
-                                    style={{ marginLeft: 20 }}
-                                    onClick={connect}
-                                    color="info">
-                                    Connect Wallet
-                                </Button>
-                            } */}
+                            
                             <NavItem>
                                 <NavLink href="http://app.perlinx.finance/">
                                     <Button

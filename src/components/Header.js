@@ -23,9 +23,6 @@ const Wrapper = styled.div`
     background-color: ${colors.cardBackground};
 `;
 
-const connectorsByName = {
-    Injected: injected
-};
 
 const Header = () => {
     

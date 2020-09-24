@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
     Container,
     Nav,
-    NavItem,
     NavLink
 } from 'reactstrap';
 import { colors } from "../constants";

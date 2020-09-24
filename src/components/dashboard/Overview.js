@@ -1,7 +1,6 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
-import { Line, Bar, Pie } from 'react-chartjs-2';
-import { Row, Col, Button, ButtonGroup } from "reactstrap";
+import {  Bar } from 'react-chartjs-2';
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors } from "../../constants"
 import { PERIODS } from "../Main"

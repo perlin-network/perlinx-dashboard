@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from "styled-components";
-import { Row, Col, Button, ButtonGroup } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors , ALL_TIME_HIGH_APY } from "../../constants"
 

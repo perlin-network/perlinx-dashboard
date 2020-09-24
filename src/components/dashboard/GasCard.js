@@ -1,6 +1,4 @@
-import React, { useContext, useState, useMemo, useEffect } from 'react';
-import styled from "styled-components"
-import { Row, Col, Button, ButtonGroup } from "reactstrap";
+import React, { useContext, useState, useEffect } from 'react';
 import { REWARD_FREQUENCY } from "../../constants"
 import { SnapshotContext } from "../../hooks/useSnapshot"
 
@@ -9,7 +7,7 @@ const GasCard = () => {
 
     const [gasData, setGasData] = useState()
     const [recoverFee, setRecoverFee] = useState(0)
-    const { getGasData, rewardPerHundredPerl, data } = useContext(SnapshotContext);
+    const { rewardPerHundredPerl, data } = useContext(SnapshotContext);
     const { feed } = data;
 
     useEffect(() => {

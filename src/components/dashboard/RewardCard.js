@@ -1,21 +1,21 @@
-import React, { useContext, useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useContext, useState, useCallback, useEffect } from 'react';
 import styled from "styled-components"
-import { Row, Col, Button, ButtonGroup, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Row, Col, Button, FormGroup, Label, Input } from "reactstrap";
 
 import { SnapshotContext } from "../../hooks/useSnapshot"
 
-const UnauthenticatedBody = styled.div`
-    padding-top: 100px;
-    text-align: center;
-    max-width: 200px;
-    margin-left: auto;
-    margin-right: auto;
+// const UnauthenticatedBody = styled.div`
+//     padding-top: 100px;
+//     text-align: center;
+//     max-width: 200px;
+//     margin-left: auto;
+//     margin-right: auto;
 
-`
+// `
 
-const AuthenticatedBody = styled.div`
+// const AuthenticatedBody = styled.div`
 
-`
+// `
 
 const Wrapper = styled.div`
     .label {
@@ -56,7 +56,7 @@ const Header = () => <h3>Calculate your estimated rewards</h3>
 
 
 const RewardCard = () => {
-    const { rewardPerHundredPerl, apy } = useContext(SnapshotContext);
+    const { rewardPerHundredPerl } = useContext(SnapshotContext);
     const [amount, setAmount] = useState(0)
     const [pool, setPool] = useState()
     const [result, setResult ] = useState(0)

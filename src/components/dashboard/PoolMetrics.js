@@ -133,7 +133,7 @@ const PoolMetrics = () => {
             }
         })
 
-    }, [pools])
+    }, [pools, totalLiquidity])
 
 
     useEffect(() => {

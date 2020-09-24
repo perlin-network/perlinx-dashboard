@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import {
     Collapse,
@@ -9,11 +9,6 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText,
     Container
 } from 'reactstrap';
 import Logo from "../assets/PerlinX-Logo.svg";
@@ -36,7 +31,7 @@ const Header = () => {
             <Container>
                 <Navbar dark expand="md">
                     <NavbarBrand href="/">
-                        <img src={Logo} />
+                        <img alt="logo" src={Logo} />
                     </NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>

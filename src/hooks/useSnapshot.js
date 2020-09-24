@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, useReducer, createContext } from 'react';
+import React, { useEffect, useMemo, useReducer, createContext } from 'react';
 import axios from "axios"
 import { Spinner } from "reactstrap"
 import { API_ENDPOINT } from "../constants" 
@@ -20,6 +20,10 @@ const Provider = ({ children }) => {
                     return {
                         ...prevState,
                         rewardPerHundredPerl: action.data
+                    }
+                default:
+                    return {
+                        ...prevState
                     }
             }
         },

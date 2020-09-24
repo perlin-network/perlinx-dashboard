@@ -1,9 +1,9 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
-import { Line, Bar, Pie } from 'react-chartjs-2';
-import { Row, Col, Button, ButtonGroup } from "reactstrap";
+import { Line, Pie } from 'react-chartjs-2';
+import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors, REWARD_FREQUENCY } from "../../constants"
+import { colors } from "../../constants"
 import { PERIODS } from "../Main"
 import RewardCard from "./RewardCard"
 import GasCard from './GasCard';
@@ -65,9 +65,9 @@ const PoolLiquidity = styled.div`
     }
 `
 
-const APYCard = styled(Card)`
+// const APYCard = styled(Card)`
 
-`
+// `
 
 const APYChartWrapper = styled.div`
     padding-top: 60px;
@@ -96,15 +96,21 @@ const Charts = ({ period }) => {
             const lastItem = feed.data.hourly[feed.data.hourly.length - 1]
             poolNames = lastItem ? lastItem.pools.map((item) => item.name) : []
             poolSizes = lastItem ? lastItem.pools.map((item) => Number(item.poolSize)) : []
-            poolNames.map((label, index) => {
+            // poolNames.map((label, index) => {
+            //     pieSideData.push({
+            //         name: label,
+            //         size: poolSizes[index]
+            //     })
+
+            // })
+            let count = 0;
+            for (let label of poolNames) {
                 pieSideData.push({
                     name: label,
-                    size: poolSizes[index]
+                    size: poolSizes[count]
                 })
-
-            })
-
-
+                count += 1
+            }
 
         } catch (e) {
 
@@ -283,7 +289,7 @@ const Charts = ({ period }) => {
                         <h3>Historical APY</h3>
                         <APYChartWrapper>
                             <Line
-                                data={apyData} 
+                                data={apyData}
                                 options={
                                     {
                                         // maintainAspectRatio: false,
@@ -297,17 +303,17 @@ const Charts = ({ period }) => {
                                                 }
                                             }
                                         },
-                                        scales :{
+                                        scales: {
                                             xAxes: [{
                                                 ticks: {
-                                                   fontColor: "white",
+                                                    fontColor: "white",
                                                 }
-                                             }],
-                                             yAxes: [{
+                                            }],
+                                            yAxes: [{
                                                 ticks: {
-                                                   fontColor: "white", 
+                                                    fontColor: "white",
                                                 }
-                                             }]
+                                            }]
                                         }
                                     }
                                 }

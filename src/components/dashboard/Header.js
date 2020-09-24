@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from "styled-components";
 import { Row, Col, Button, ButtonGroup } from "reactstrap";
-import { RefreshCcw } from "react-feather"
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors } from "../../constants"
 
@@ -31,23 +30,23 @@ const Switcher = styled(Col)`
     
 `
 
-const StyledButtonGroup = styled(ButtonGroup)`
-    background-color: ${colors.cardBackground};
-    min-width: 200px;
-    border-radius: 6px;
+// const StyledButtonGroup = styled(ButtonGroup)`
+//     background-color: ${colors.cardBackground};
+//     min-width: 200px;
+//     border-radius: 6px;
     
-`;
+// `;
 
-const StyledButton = styled(Button)`
-    background-color: transparent;
-    border-color: transparent;
-    color: #19DED1;
-    margin-top: 5px;
-    margin-bottom: 5px; 
+// const StyledButton = styled(Button)`
+//     background-color: transparent;
+//     border-color: transparent;
+//     color: #19DED1;
+//     margin-top: 5px;
+//     margin-bottom: 5px; 
 
 
 
-`;
+// `;
 
 const Header = ({ period, setPeriod }) => {
 
@@ -70,8 +69,8 @@ const Header = ({ period, setPeriod }) => {
                 <Switcher>
                     <div style={{ marginTop: "auto", marginBottom: "auto" }}>
                         <ButtonGroup>
-                            <Button onClick={() => setPeriod("DAILY")} outline={period != "DAILY"} color="info" size="sm">Daily</Button>
-                            <Button onClick={() => setPeriod("HOURLY")} outline={period != "HOURLY"} color="info" size="sm">Hourly</Button>
+                            <Button onClick={() => setPeriod("DAILY")} outline={period !== "DAILY"} color="info" size="sm">Daily</Button>
+                            <Button onClick={() => setPeriod("HOURLY")} outline={period !== "HOURLY"} color="info" size="sm">Hourly</Button>
                         </ButtonGroup>
 
                     </div>

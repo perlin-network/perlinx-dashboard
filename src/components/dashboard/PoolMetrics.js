@@ -1,7 +1,5 @@
-import React, { useContext, useState, useMemo, useEffect } from 'react';
+import React, { useContext, useMemo, useEffect } from 'react';
 import styled from "styled-components";
-import { Line, Bar, Pie } from 'react-chartjs-2';
-import { Row, Col, Button, ButtonGroup } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors } from "../../constants"
 
@@ -69,7 +67,7 @@ const Dot = styled.div`
 const PoolMetrics = () => {
 
     const context = useContext(SnapshotContext);
-    const { feed, stat } = context.data;
+    const { feed } = context.data;
     const { setRewardPerHundred } = context;
 
     const getDotColor = (index) => {
@@ -90,7 +88,7 @@ const PoolMetrics = () => {
 
     }
 
-    const { pools, totalLiquidity } = useMemo(() => {
+    const poolData = useMemo(() => {
         let pools = []
         let totalLiquidity = 0;
         try {
@@ -109,6 +107,7 @@ const PoolMetrics = () => {
 
     }, [feed])
 
+    const { pools, totalLiquidity } = poolData;
 
     const metricData = useMemo(() => {
         return pools.map((pool, index) => {
@@ -145,7 +144,7 @@ const PoolMetrics = () => {
             }, {})
             setRewardPerHundred(rewardPerHundred)
         }
-    }, [metricData])
+    }, [metricData, setRewardPerHundred])
 
     return (
         <Wrapper>

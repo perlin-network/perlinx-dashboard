@@ -118,6 +118,7 @@ const PoolMetrics = () => {
             const totalShare = (Number(pool.totalPerl) / Number(totalLiquidity)) * 100
             const rewardAllocation = (totalShare / 100) * Number(1000000)
             const rewardPer100PERL = (rewardAllocation / totalPerlStaked) * 100
+            const apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
 
             return {
                 name: pool.name,
@@ -129,7 +130,8 @@ const PoolMetrics = () => {
                 lockedPercentage,
                 totalShare,
                 rewardAllocation,
-                rewardPer100PERL
+                rewardPer100PERL,
+                apr
             }
         })
 
@@ -163,6 +165,7 @@ const PoolMetrics = () => {
                         <th>Rewards Allocated</th>
                         <th>PERL Staked</th>
                         <th width="10%">PERL reward / 100 PERL staked</th>
+                        <th>APY</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -206,6 +209,9 @@ const PoolMetrics = () => {
                                 </td>
                                 <td>
                                     {Number(pool.rewardPer100PERL).toLocaleString()}
+                                </td>
+                                <td>
+                                    {(pool.apr * 100).toFixed(0)}%
                                 </td>
                             </tr>
                         )

@@ -141,9 +141,10 @@ const PoolMetrics = () => {
             const rewardPerHundred = metricData.reduce((json, pool) => {
                 json[pool.name] = pool.rewardPer100PERL
                 return json
-            }, {})
+            }, {}) 
             setRewardPerHundred(rewardPerHundred)
         }
+        // eslint-disable-next-line
     }, [metricData])
 
     return (

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
 import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors , ALL_TIME_HIGH_APY } from "../../constants"
+import { colors, ALL_TIME_HIGH_APY } from "../../constants"
 
 const Wrapper = styled.div`
 
@@ -55,9 +55,25 @@ const Card = styled.div`
 const Stat = () => {
     const { data, apy } = useContext(SnapshotContext);
 
-    const { stat } = data;
+    const { stat, feed } = data;
 
-    // const apy = (1000000/ (stat.totalPerlStaked * 2)) * 52 * 100
+    const { totalMinted, totalCollateral } = useMemo(() => {
+        try {
+            const lastItem = feed?.data?.hourly[feed.data.hourly.length - 1]
+            // FIXME : This approach won't work if there is 90/10 pool in the system
+            const perlPrice = (Number(stat.totalSize)/2) / Number(stat.totalPerlStaked)
+            return {
+                totalMinted: Number(lastItem?.synthetics[0]?.totalMinted),
+                totalCollateral : Number(lastItem?.synthetics[0]?.totalCollateral) * perlPrice
+            }
+        } catch (e) {
+
+        }
+        return {
+            totalMinted : 0,
+            totalCollateral:  0
+        }
+    }, [stat, feed])
 
     return (
         <Wrapper>
@@ -93,7 +109,7 @@ const Stat = () => {
 
                 </Col>
                 <Col sm="4">
-                    <Card>
+                    {/* <Card>
                         <div>
                             <h3>Current Rewards</h3>
                             <p>{`${(Number(stat.currentReward)).toFixed(2)} PERL`}</p>
@@ -101,6 +117,16 @@ const Stat = () => {
                         <div>
                             <h3>Total PERL Rewards</h3>
                             <p>{`${Number(1000000).toFixed(0)} PERL`}</p>
+                        </div>
+                    </Card> */}
+                    <Card>
+                        <div>
+                            <h3>Total Minted</h3>
+                            <p> {totalMinted.toLocaleString()} pxUSD</p>
+                        </div>
+                        <div>
+                            <h3>Total Collateral</h3>
+                            <p> ${totalCollateral.toLocaleString()} </p>
                         </div>
                     </Card>
                 </Col>

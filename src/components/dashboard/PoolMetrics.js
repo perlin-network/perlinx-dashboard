@@ -144,7 +144,7 @@ const PoolMetrics = () => {
             }, {})
             setRewardPerHundred(rewardPerHundred)
         }
-    }, [metricData, setRewardPerHundred])
+    }, [metricData])
 
     return (
         <Wrapper>
@@ -167,7 +167,7 @@ const PoolMetrics = () => {
                 <tbody>
                     {metricData.map((pool, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <td>
                                     <div style={{ display: "flex", flexDirection: "row" }}>
                                         <div>

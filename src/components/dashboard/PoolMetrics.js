@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useEffect } from 'react';
 import styled from "styled-components";
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors } from "../../constants"
-
+import { getDotColor } from "../../utils/colors"
 
 const Wrapper = styled.div`
     margin-top: 10px;
@@ -70,23 +70,7 @@ const PoolMetrics = () => {
     const { feed } = context.data;
     const { setRewardPerHundred } = context;
 
-    const getDotColor = (index) => {
-        switch (index) {
-            case 0:
-                return "#65D6D2"
-            case 1:
-                return "#8FD9ED"
-            case 2:
-                return "#5AAEE1"
-            case 3:
-                return "#5181FD"
-            case 4:
-                return "#6C79FB"
-            default:
-                return "grey"
-        }
-
-    }
+   
 
     const poolData = useMemo(() => {
         let pools = []

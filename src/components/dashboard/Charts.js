@@ -7,6 +7,7 @@ import { colors } from "../../constants"
 import { PERIODS } from "../Main"
 import RewardCard from "./RewardCard"
 import GasCard from './GasCard';
+import { getDotColor , patterns} from "../../utils/colors"
 
 const Wrapper = styled.div`
     
@@ -150,13 +151,7 @@ const Charts = ({ period }) => {
                 labels: poolNames,
                 datasets: [{
                     data: poolSizes,
-                    backgroundColor: [
-                        '#65D6D2',
-                        '#8FD9ED',
-                        '#5AAEE1',
-                        "#5181FD",
-                        "#6C79FB"
-                    ]
+                    backgroundColor: patterns
                 }]
             },
             pieSideData,
@@ -216,23 +211,7 @@ const Charts = ({ period }) => {
     //     }
     // };
 
-    const getDotColor = (index) => {
-        switch (index) {
-            case 0:
-                return "#65D6D2"
-            case 1:
-                return "#8FD9ED"
-            case 2:
-                return "#5AAEE1"
-            case 3:
-                return "#5181FD"
-            case 4:
-                return "#6C79FB"
-            default:
-                return "grey"
-        }
-
-    }
+    
 
     return (
         <Wrapper>

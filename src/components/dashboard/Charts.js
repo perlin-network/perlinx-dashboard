@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Line, Pie } from 'react-chartjs-2';
 import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors } from "../../constants"
+import { colors, REWARD_PER_PERIOD } from "../../constants"
 import { PERIODS } from "../Main"
 import RewardCard from "./RewardCard"
 import GasCard from './GasCard';
@@ -121,13 +121,23 @@ const Charts = ({ period }) => {
 
         try {
 
+            const getRewardRate = (timestamp) => {
+                const isNew =  Number(timestamp)/1000 > 1601356148
+                if (isNew) {
+                    return REWARD_PER_PERIOD
+                } else {
+                    return 1000000
+                }
+            }
+
             if (period === PERIODS.HOURLY) {
                 const hourly = feed.data.hourly.sort(function (a, b) {
                     return a.timestamp - b.timestamp;
                 });
                 labels = hourly ? hourly.map(item => new Date(Number(item.timestamp)).toLocaleTimeString()) : []
                 apys = hourly ? hourly.map(item => {
-                    const apy = (1000000 / (item.totalPerlStaked * 2)) * 52 * 100
+                    const rate = getRewardRate(item.timestamp)
+                    const apy = (rate / (item.totalPerlStaked * 2)) * 52 * 100
                     return apy;
                 }) : []
             } else {
@@ -137,7 +147,8 @@ const Charts = ({ period }) => {
                 }).filter(item => ["1598572800000", "1598486400000", "1598400000000", "1598313600000", "1598140800000", "1598227200000"].indexOf(item.timestamp) === -1)
                 labels = daily ? daily.map(item => new Date(Number(item.timestamp)).toLocaleDateString()) : []
                 apys = daily ? daily.map(item => {
-                    const apy = (1000000 / (item.totalPerlStaked * 2)) * 52 * 100
+                    const rate = getRewardRate(item.timestamp)
+                    const apy = (rate / (item.totalPerlStaked * 2)) * 52 * 100
                     return apy;
                 }) : []
             }

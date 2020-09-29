@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useEffect } from 'react';
 import styled from "styled-components";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors } from "../../constants"
+import { colors, REWARD_PER_PERIOD } from "../../constants"
 import { getDotColor } from "../../utils/colors"
 
 const Wrapper = styled.div`
@@ -100,7 +100,7 @@ const PoolMetrics = () => {
             const totalUnlockedBpt = Number(pool.totalBpt) - Number(totalLockedBpt)
             const lockedPercentage = (Number(totalLockedBpt) / Number(pool.totalBpt)) * 100
             const totalShare = (Number(pool.totalPerl) / Number(totalLiquidity)) * 100
-            const rewardAllocation = (totalShare / 100) * Number(1000000)
+            const rewardAllocation = (totalShare / 100) * Number(REWARD_PER_PERIOD)
             const rewardPer100PERL = (rewardAllocation / totalPerlStaked) * 100
             const apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
 

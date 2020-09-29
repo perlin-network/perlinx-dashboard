@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useReducer, createContext } from 'react';
 import axios from "axios"
 import { Spinner } from "reactstrap"
-import { API_ENDPOINT } from "../constants" 
+import { API_ENDPOINT, REWARD_PER_PERIOD } from "../constants" 
 
 export const SnapshotContext = createContext({});
 
@@ -35,7 +35,7 @@ const Provider = ({ children }) => {
 
     const { isLoading, data, rewardPerHundredPerl } = state;
 
-    const apy = data ? ((1000000/ (data.stat.totalPerlStaked * 2)) * 52 * 100) : 0
+    const apy = data ? ((REWARD_PER_PERIOD / (data.stat.totalPerlStaked * 2)) * 52 * 100) : 0
 
     const snapshotContext = useMemo(
         () => ({

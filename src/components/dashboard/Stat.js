@@ -116,7 +116,7 @@ const Stat = () => {
                         </div>
                         <div>
                             <h3>Total PERL Rewards</h3>
-                            <p>{`${Number(1000000).toFixed(0)} PERL`}</p>
+                            <p>{`${Number(1200000).toFixed(0)} PERL`}</p>
                         </div>
                     </Card> */}
                     <Card>

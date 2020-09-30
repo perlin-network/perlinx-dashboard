@@ -94,12 +94,29 @@ const PoolMetrics = () => {
     const { pools, totalLiquidity } = poolData;
 
     const metricData = useMemo(() => {
+
+        const getMultipler = (poolName ) => {
+            if (poolName.indexOf("pxUSD") === -1) {
+                return 1
+            } else {
+                return 3
+            }
+        }
+
+        const totalPerlAfterMultiplied = pools.reduce((sum, pool) => {
+            const multiplier = getMultipler(pool.name)
+            return sum + (Number(pool.totalPerl) * multiplier)
+        },0)
+
         return pools.map((pool, index) => {
             const totalPerlStaked = (pool.bptInRewardContract / pool.totalBpt) * pool.totalPerl
             const totalLockedBpt = pool.bptInRewardContract
             const totalUnlockedBpt = Number(pool.totalBpt) - Number(totalLockedBpt)
             const lockedPercentage = (Number(totalLockedBpt) / Number(pool.totalBpt)) * 100
-            const totalShare = (Number(pool.totalPerl) / Number(totalLiquidity)) * 100
+            const rawTotalShare = (Number(pool.totalPerl) / Number(totalLiquidity)) * 100
+            const multiplier = getMultipler(pool.name)
+            const totalShare =  ((Number(pool.totalPerl) * multiplier) / Number(totalPerlAfterMultiplied)) * 100
+
             const rewardAllocation = (totalShare / 100) * Number(REWARD_PER_PERIOD)
             const rewardPer100PERL = (rewardAllocation / totalPerlStaked) * 100
             const apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
@@ -113,6 +130,7 @@ const PoolMetrics = () => {
                 totalUnlockedBpt,
                 lockedPercentage,
                 totalShare,
+                rawTotalShare,
                 rewardAllocation,
                 rewardPer100PERL,
                 apr
@@ -183,7 +201,7 @@ const PoolMetrics = () => {
                                     {Number(pool.totalPerl).toLocaleString()}
                                 </td>
                                 <td>
-                                    {pool.totalShare.toFixed(2)}%
+                                    {pool.rawTotalShare.toFixed(2)}%
                                 </td>
                                 <td>
                                     {Number(pool.rewardAllocation).toLocaleString()}

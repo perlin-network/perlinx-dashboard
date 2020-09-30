@@ -13,8 +13,12 @@ const GasCard = () => {
     useEffect(() => {
         try {
             const lastItem = feed.data.hourly[feed.data.hourly.length - 1]
-            const { gasData } = lastItem;
+
+            let { gasData } = lastItem;
             
+            if (!gasData.safeLow) {
+                gasData = feed.data.hourly[feed.data.hourly.length - 2].gasData
+            }
             // FIXME: FIX ON THE BACKEND AND RE-WRITE ALL ENTRIES IN DYNAMODB
             setGasData({
                 ...gasData,

@@ -1,7 +1,6 @@
 
 
-export const getDotColor = (index) => {
-    console.log("index : ", index)
+export const getDotColor = (index) => { 
     switch (index) {
         case 0:
             return "#65D6D2"

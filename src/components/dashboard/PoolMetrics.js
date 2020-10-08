@@ -109,7 +109,8 @@ const PoolMetrics = () => {
         },0)
 
         return pools.map((pool, index) => {
-            const totalPerlStaked = (pool.bptInRewardContract / pool.totalBpt) * pool.totalPerl
+            // const totalPerlStaked = (pool.bptInRewardContract / pool.totalBpt) * pool.totalPerl
+            const totalPerlStaked =  pool.totalPerl
             const totalLockedBpt = pool.bptInRewardContract
             const totalUnlockedBpt = Number(pool.totalBpt) - Number(totalLockedBpt)
             const lockedPercentage = (Number(totalLockedBpt) / Number(pool.totalBpt)) * 100

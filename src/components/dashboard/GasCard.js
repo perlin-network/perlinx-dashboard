@@ -7,7 +7,7 @@ const GasCard = () => {
 
     const [gasData, setGasData] = useState()
     // const [recoverFee, setRecoverFee] = useState(0)
-    const { rewardPerHundredPerl, data } = useContext(SnapshotContext);
+    const { data } = useContext(SnapshotContext);
     const { feed } = data;
 
     useEffect(() => {

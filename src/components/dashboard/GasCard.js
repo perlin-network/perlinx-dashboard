@@ -6,7 +6,7 @@ const GasCard = () => {
 
 
     const [gasData, setGasData] = useState()
-    const [recoverFee, setRecoverFee] = useState(0)
+    // const [recoverFee, setRecoverFee] = useState(0)
     const { rewardPerHundredPerl, data } = useContext(SnapshotContext);
     const { feed } = data;
 
@@ -26,16 +26,16 @@ const GasCard = () => {
                 claimRewardFee : (gasData.claimRewardFee/ 10),
                 equivalentGasFee : (gasData.equivalentGasFee / 10)
             })
-            if (Object.keys(rewardPerHundredPerl).length > 0) {
-                const recoverFee = gasData ? ((Number(gasData.equivalentGasFee) / rewardPerHundredPerl[Object.keys(rewardPerHundredPerl)[0]]) * 100) : 0
-                setRecoverFee(recoverFee)
-            }
+            // if (Object.keys(rewardPerHundredPerl).length > 0) {
+            //     const recoverFee = gasData ? ((Number(gasData.equivalentGasFee) / rewardPerHundredPerl[Object.keys(rewardPerHundredPerl)[0]]) * 100) : 0
+            //     setRecoverFee(recoverFee)
+            // }
         } catch (e) {
 
         }
 
-    }, [feed, rewardPerHundredPerl])
-
+    // }, [feed, rewardPerHundredPerl])
+    }, [feed])
 
     return (
         <>

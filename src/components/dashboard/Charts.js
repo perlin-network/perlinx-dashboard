@@ -118,7 +118,6 @@ const Charts = ({ period }) => {
         }
 
 
-
         try {
 
             const getRewardRate = (timestamp) => {
@@ -137,7 +136,7 @@ const Charts = ({ period }) => {
                 labels = hourly ? hourly.map(item => new Date(Number(item.timestamp)).toLocaleTimeString()) : []
                 apys = hourly ? hourly.map(item => {
                     const rate = getRewardRate(item.timestamp)
-                    const apy = (rate / (item.totalPerlStaked * 2)) * 52 * 100
+                    const apy = (rate / (item.totalPerlLiquidity * 2)) * 52 * 100
                     return apy;
                 }) : []
             } else {
@@ -148,7 +147,7 @@ const Charts = ({ period }) => {
                 labels = daily ? daily.map(item => new Date(Number(item.timestamp)).toLocaleDateString()) : []
                 apys = daily ? daily.map(item => {
                     const rate = getRewardRate(item.timestamp)
-                    const apy = (rate / (item.totalPerlStaked * 2)) * 52 * 100
+                    const apy = (rate / (item.totalPerlLiquidity * 2)) * 52 * 100
                     return apy;
                 }) : []
             }

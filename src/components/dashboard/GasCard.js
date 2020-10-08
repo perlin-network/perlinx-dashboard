@@ -51,10 +51,10 @@ const GasCard = () => {
                         {REWARD_FREQUENCY}
                     </p>
                 </div>
-                <div style={{ marginLeft: 40 }}>
+                {/* <div style={{ marginLeft: 40 }}>
                     <h4>PERL to stake for recovering gas fee</h4>
                     <p className="font-large">{`${recoverFee.toFixed(2)}`} PERL</p>
-                </div>
+                </div> */}
             </div>
             {[
                 { key: "Gas used to claim", value: gasData ? Math.floor(gasData.gasUsed) : 0 },

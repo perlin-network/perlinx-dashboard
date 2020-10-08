@@ -55,7 +55,8 @@ const Card = styled.div`
 const Stat = () => {
     const { data, apy } = useContext(SnapshotContext);
 
-    const { stat, feed } = data;
+    // const { stat, feed } = data;
+    const { feed } = data;
 
     const { totalMinted, totalCollateral } = useMemo(() => {
         try {

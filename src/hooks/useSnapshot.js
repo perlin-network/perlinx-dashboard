@@ -63,10 +63,24 @@ const Provider = ({ children }) => {
         try {
             const statResponse = await axios.get(`${API_ENDPOINT}/stat`)
             const feedResponse = await axios.get(`${API_ENDPOINT}/data`)
-            const data = {
+            let data = {
                 stat : statResponse.data,
                 feed : feedResponse.data
             }
+            // Getting PERL price / APY from the most recent record
+            try {
+                const mostRecentEntry = feedResponse.data.data.hourly[feedResponse.data.data.hourly.length - 1]
+                data = {
+                    ...data,
+                    perlPrice : (Number(mostRecentEntry.totalSize) / 2) / (Number(mostRecentEntry.totalPerlLiquidity)),
+                    apy : ((REWARD_PER_PERIOD / (Number(mostRecentEntry.totalPerlLiquidity) * 2)) * 52 * 100)
+                }
+
+            } catch (e) {
+
+            }
+            
+            
             dispatch({ type: 'RESTORE_DATA', data });
         } catch (error) {
             alert("Server error ")

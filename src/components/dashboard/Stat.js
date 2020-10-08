@@ -61,7 +61,9 @@ const Stat = () => {
         try {
             const lastItem = feed?.data?.hourly[feed.data.hourly.length - 1]
             // FIXME : This approach won't work if there is 90/10 pool in the system
-            const perlPrice = (Number(stat.totalSize)/2) / Number(stat.totalPerlStaked)
+            // const perlPrice = (Number(stat.totalSize)/2) / Number(stat.totalPerlStaked)
+            const perlPrice = 0.020503
+            
             return {
                 totalMinted: Number(lastItem?.synthetics[0]?.totalMinted),
                 totalCollateral : Number(lastItem?.synthetics[0]?.totalCollateral) * perlPrice

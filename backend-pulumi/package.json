@@ -1,0 +1,12 @@
+{
+    "name": "perlinx-dashboard",
+    "main": "index.js",
+    "dependencies": {
+        "@pulumi/pulumi": "^2.0.0",
+        "@pulumi/aws": "^3.0.0",
+        "@pulumi/awsx": "^0.22.0",
+        "axios": "^0.20.0",
+        "ethers": "^5.0.9",
+        "twit": "^2.2.11"
+    }
+}

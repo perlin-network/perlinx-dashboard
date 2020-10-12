@@ -123,7 +123,7 @@ const Stat = () => {
                     <Card>
                         <div>
                             <h3>Total Minted</h3>
-                            <p> {totalMinted.toLocaleString()} pxUSD</p>
+                            <p> {Math.floor(totalMinted).toLocaleString()} pxUSD</p>
                         </div>
                         <div>
                             <h3>Total Collateral</h3>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
     Collapse,
     Navbar,
-    Button,
     NavbarToggler,
     NavbarBrand,
     Nav,
@@ -13,6 +12,7 @@ import {
 } from 'reactstrap';
 import Logo from "../assets/PerlinX-Logo.svg";
 import { colors } from "../constants";
+import Button from "./ui/Button"
 
 const Wrapper = styled.div`
     background-color: ${colors.cardBackground};
@@ -36,13 +36,11 @@ const Header = () => {
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            
                             <NavItem>
                                 <NavLink href="http://app.perlinx.finance/">
-                                    <Button
-                                        color="info">
+                                    <Button>
                                         Trade Now
-                                </Button>
+                                    </Button>
                                 </NavLink>
                             </NavItem>
 

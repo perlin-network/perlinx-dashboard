@@ -4,7 +4,7 @@ import { Row, Col, FormGroup, Label, Input } from "reactstrap";
 import Button from "../ui/Button"
 import { SnapshotContext } from "../../hooks/useSnapshot"
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
     .label {
         font-size: 12px;
     }
@@ -28,20 +28,7 @@ const Wrapper = styled.div`
         font-size: 18px;
     }
 
-    .row-selection {
-        padding-left: 0px;
-        padding-right: 0px; 
-        margin-top: 10px;
-    }
 
-    .row {
-        padding: 15px;
-    }
-    .row-estimation {
-        padding: 15px;
-        display: flex;
-        flex-direction: row;
-    }
     
 `
 
@@ -92,7 +79,7 @@ const RewardCard = () => {
     return (
         <Wrapper>
             <Header />
-            <Row className="row-selection">
+            <Row style={{marginTop : 20 }}>
                 <Col xs="6">
                     <FormGroup>
                         <Label className="label" for="pool">SELECT A POOL</Label>
@@ -101,36 +88,28 @@ const RewardCard = () => {
                         </Input>
                     </FormGroup>
                 </Col>
-                <Col xs="6">
+                <Col xs="6"> 
                     <FormGroup>
                         <Label className="label" for="amount">PERL TO STAKE</Label>
                         <Input value={amount} onChange={handleChange} type="number" name="amount" id="amount" />
                     </FormGroup>
                 </Col>
             </Row>
-            <Row className="row">
+            <Row style={{padding: 15}}>
                 <Button onClick={calculate} >
                     Calculate
                 </Button>
             </Row>
-            <Row className="row">
+            <Row style={{padding: 15}}>
                 <Divider />
             </Row>
-            <Row className="row-estimation">
+            <Row style={{padding: 15, display : "flex", flexDirection : "row"}}>
                 <div style={{ marginRight: 40 }}>
                     <h4>Est. PERL rewards</h4>
                     <p className="font-large">
                         {`${result.toLocaleString()} PERL`}
                     </p>
                 </div>
-                {/*
-                <div>
-                    <h4>Est. APY</h4>
-                    <p className="font-large">
-                        {apy.toFixed(2)}%
-                    </p>
-                </div>
-                */}
             </Row>
         </Wrapper>
     )

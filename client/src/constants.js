@@ -4,7 +4,8 @@ export const colors = {
     primary: "#FFFFFF",
     secondary: "rgba(255,255,255,0.7)",
     background : "#162536",
-    cardBackground : "#1D3046"
+    cardBackground : "#1D3046",
+    buttonBackground : "#19DED1"
 }
 
 export const API_ENDPOINT = "https://dbu9ftcsij.execute-api.ap-southeast-1.amazonaws.com/stage";

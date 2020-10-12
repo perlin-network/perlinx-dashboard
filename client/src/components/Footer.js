@@ -45,7 +45,7 @@ const Divider = styled.hr`
 const Footer = () => {
     return (
         <Wrapper>
-            <Container>
+            <Container fluid>
                 <Disclamer>
                     <p>DISCLAIMER: This PerlinX Dashboard is merely provided as a free tool for the convenience of users. The data displayed is drawn from a combination of sources, some of which are 3rd-party sources not under the control of PerlinX. Therefore, we do not guarantee the accuracy or currency of any data displayed on the Dashboard and PerlinX interface. We strongly recommend users to do their own independent research, checks and due diligence on any data displayed before making any decisions to participate on PerlinX. The data displayed should also not be considered investment advice of any kind.</p>
 

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
     Collapse,
     Navbar,
-    Button,
     NavbarToggler,
     NavbarBrand,
     Nav,
@@ -13,6 +12,7 @@ import {
 } from 'reactstrap';
 import Logo from "../assets/PerlinX-Logo.svg";
 import { colors } from "../constants";
+import Button from "./ui/Button"
 
 const Wrapper = styled.div`
     background-color: ${colors.cardBackground};
@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <Wrapper>
-            <Container>
+            <Container fluid>
                 <Navbar dark expand="md">
                     <NavbarBrand href="/">
                         <img alt="logo" src={Logo} />
@@ -39,10 +39,9 @@ const Header = () => {
                             
                             <NavItem>
                                 <NavLink href="http://app.perlinx.finance/">
-                                    <Button
-                                        color="info">
+                                    <Button>
                                         Trade Now
-                                </Button>
+                                    </Button>
                                 </NavLink>
                             </NavItem>
 

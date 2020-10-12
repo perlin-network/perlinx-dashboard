@@ -30,35 +30,10 @@ const Switcher = styled(Col)`
     
 `
 
-// const StyledButtonGroup = styled(ButtonGroup)`
-//     background-color: ${colors.cardBackground};
-//     min-width: 200px;
-//     border-radius: 6px;
-    
-// `;
-
-// const StyledButton = styled(Button)`
-//     background-color: transparent;
-//     border-color: transparent;
-//     color: #19DED1;
-//     margin-top: 5px;
-//     margin-bottom: 5px; 
-
-
-
-// `;
 
 const Header = ({ period, setPeriod }) => {
-
-    
-
-    
-
-
     const { data } = useContext(SnapshotContext);
-
     const { stat } = data;
-
     return (
         <Wrapper>
             <Row>
@@ -72,7 +47,6 @@ const Header = ({ period, setPeriod }) => {
                             <Button onClick={() => setPeriod("DAILY")} outline={period !== "DAILY"} color="info" size="sm">Daily</Button>
                             <Button onClick={() => setPeriod("HOURLY")} outline={period !== "HOURLY"} color="info" size="sm">Hourly</Button>
                         </ButtonGroup>
-
                     </div>
 
 

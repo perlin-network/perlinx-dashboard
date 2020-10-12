@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <Wrapper>
-            <Container fluid>
+            <Container>
                 <Navbar dark expand="md">
                     <NavbarBrand href="/">
                         <img alt="logo" src={Logo} />
@@ -36,7 +36,6 @@ const Header = () => {
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            
                             <NavItem>
                                 <NavLink href="http://app.perlinx.finance/">
                                     <Button>

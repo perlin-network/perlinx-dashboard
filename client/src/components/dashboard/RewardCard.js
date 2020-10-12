@@ -1,21 +1,8 @@
 import React, { useContext, useState, useCallback, useEffect } from 'react';
 import styled from "styled-components"
-import { Row, Col, Button, FormGroup, Label, Input } from "reactstrap";
-
+import { Row, Col, FormGroup, Label, Input } from "reactstrap";
+import Button from "../ui/Button"
 import { SnapshotContext } from "../../hooks/useSnapshot"
-
-// const UnauthenticatedBody = styled.div`
-//     padding-top: 100px;
-//     text-align: center;
-//     max-width: 200px;
-//     margin-left: auto;
-//     margin-right: auto;
-
-// `
-
-// const AuthenticatedBody = styled.div`
-
-// `
 
 const Wrapper = styled.div`
     .label {
@@ -41,7 +28,17 @@ const Wrapper = styled.div`
         font-size: 18px;
     }
 
-    
+    .row-selection {
+        margin-top: 40px;
+    }
+    .row {
+        padding: 15px;
+    }
+    .row-estimation {
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+    }
 
 `
 
@@ -53,7 +50,6 @@ const Divider = styled.div`
 `
 
 const Header = () => <h3>Calculate your estimated rewards</h3>
-
 
 const RewardCard = () => {
     const { rewardPerHundredPerl } = useContext(SnapshotContext);
@@ -68,52 +64,14 @@ const RewardCard = () => {
         }
     }, [rewardPerHundredPerl])
 
-    // const context = useWeb3React();
-    // const { account } = context;
-    // const { connect } = useWallet()
-
-    // return (
-    //     <>
-    //         {!account ?
-    //             (
-    //                 <>
-    //                     <Header />
-    //                     <UnauthenticatedBody>
-    //                         Connect your wallet to calculate estimated rewards
-    //                         <Button color="info" style={{ marginTop: 20 }} onClick={connect}>
-    //                             Connect wallet
-    //                         </Button>
-    //                     </UnauthenticatedBody>
-    //                 </>
-    //             ) :
-    //             (
-    //                 <>
-    //                     <Header />
-    //                     <AuthenticatedBody>
-
-    //                     </AuthenticatedBody>
-    //                 </>
-    //             )
-    //         }
-    //     </>
-    // )
-
-
     const handleChange = (e) => {
         const newAmount = e.target.value.replace(/^0+/, '')
         setAmount(parseInt(newAmount, 10))
     }
 
-
     const handlePool = (e) => {
         setPool(e.target.value)
     }
-
-    // useEffect(() => {
-    //     if (pool && (Number(amount) > 0)) {
-    //         console.log("pool : ", pool, amount)
-    //     }
-    // }, [pool, amount])
 
     const calculate = useCallback(() => { 
         if (pool && (Number(amount) > 0)) {
@@ -131,18 +89,12 @@ const RewardCard = () => {
     return (
         <Wrapper>
             <Header />
-            <Row style={{ marginTop: 40 }}>
+            <Row className="row-selection">
                 <Col xs="6">
                     <FormGroup>
                         <Label className="label" for="pool">SELECT A POOL</Label>
                         <Input onChange={handlePool} className="selection" type="select" name="pool" id="pool">
-                            {Object.keys(rewardPerHundredPerl).map((name, index) => {
-                                return (
-                                    <option value={name} key={index}>{name}</option>
-                                )
-                            })
-
-                            }
+                            {Object.keys(rewardPerHundredPerl).map((name, index) =>  <option value={name} key={index}>{name}</option>) }
                         </Input>
                     </FormGroup>
                 </Col>
@@ -153,18 +105,15 @@ const RewardCard = () => {
                     </FormGroup>
                 </Col>
             </Row>
-            <Row style={{ padding: 15 }}>
-                <Button
-                    color="info"
-                    onClick={calculate}
-                >
+            <Row className="row">
+                <Button onClick={calculate} >
                     Calculate
                 </Button>
             </Row>
-            <Row style={{ padding: 15 }}>
+            <Row className="row">
                 <Divider />
             </Row>
-            <Row style={{ padding: 15, display: "flex", flexDirection: "row" }}>
+            <Row className="row-estimation">
                 <div style={{ marginRight: 40 }}>
                     <h4>Est. PERL rewards</h4>
                     <p className="font-large">
@@ -179,10 +128,7 @@ const RewardCard = () => {
                     </p>
                 </div>
                 */}
-                
             </Row>
-
-
         </Wrapper>
     )
 

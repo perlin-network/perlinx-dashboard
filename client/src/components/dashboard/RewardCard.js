@@ -29,8 +29,11 @@ const Wrapper = styled.div`
     }
 
     .row-selection {
-        margin-top: 40px;
+        padding-left: 0px;
+        padding-right: 0px; 
+        margin-top: 10px;
     }
+
     .row {
         padding: 15px;
     }
@@ -39,7 +42,7 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: row;
     }
-
+    
 `
 
 const Divider = styled.div`

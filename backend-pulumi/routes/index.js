@@ -714,6 +714,29 @@ exports.stat = async (event, TableName) => {
     const currentReward = lastItem.currentReward;
     const totalUsers = lastItem.totalUsers || 0;
 
+    // Provides each pool volume
+    let pools = []
+    try {
+        const volumeJson = Items.filter(item => item.blockNumber).reduce((result, item) => {
+            item.pools.forEach((pool) => {
+                if (result[pool.name]) {
+                    result[pool.name] += Number(pool.volume)
+                } else {
+                    result[pool.name] = Number(pool.volume)
+                }
+            })
+            return result
+        }, {})
+        for (let poolName of Object.keys(volumeJson)) {
+            pools.push({
+                name : poolName,
+                volume : volumeJson[poolName]
+            })
+        }
+    } catch (e) {
+
+    }
+
     return {
         statusCode: 200,
         headers: headers,
@@ -724,7 +747,8 @@ exports.stat = async (event, TableName) => {
             totalSize,
             volume,
             currentReward,
-            totalUsers
+            totalUsers,
+            pools
         })
     }
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useEffect } from 'react';
 import styled from "styled-components";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors, REWARD_PER_PERIOD } from "../../constants"
+import { colors } from "../../constants"
 import { getDotColor } from "../../utils/colors"
 
 const Wrapper = styled.div`
@@ -70,8 +70,6 @@ const PoolMetrics = () => {
     const { feed } = context.data;
     const { setRewardPerHundred } = context;
 
-   
-
     const poolData = useMemo(() => {
         let pools = []
         let totalLiquidity = 0;
@@ -118,9 +116,13 @@ const PoolMetrics = () => {
             const multiplier = getMultipler(pool.name)
             const totalShare =  ((Number(pool.totalPerl) * multiplier) / Number(totalPerlAfterMultiplied)) * 100
 
-            const rewardAllocation = (totalShare / 100) * Number(REWARD_PER_PERIOD)
+            // const rewardAllocation = (totalShare / 100) * Number(REWARD_PER_PERIOD)
+            // new reward calc. Oct onwards
+            const rewardAllocation = (totalShare / 100) * Number(context?.data?.totalWeeklyRewardOct)
             const rewardPer100PERL = (rewardAllocation / totalPerlStaked) * 100
             const apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
+
+            
 
             return {
                 name: pool.name,
@@ -137,7 +139,7 @@ const PoolMetrics = () => {
                 apr
             }
         })
-
+        // eslint-disable-next-line
     }, [pools, totalLiquidity])
 
 
@@ -166,7 +168,7 @@ const PoolMetrics = () => {
                         <th>PERL Liquidity</th>
                         <th>Share of total</th>
                         <th>Rewards Allocated</th>
-                        <th>PERL Staked</th>
+                        {/* <th>PERL Staked</th> */}
                         <th width="10%">PERL reward / 100 PERL staked</th>
                         <th>APY</th>
                     </tr>
@@ -207,9 +209,9 @@ const PoolMetrics = () => {
                                 <td>
                                     {Number(pool.rewardAllocation).toLocaleString()}
                                 </td>
-                                <td>
+                                {/* <td>
                                     {Number(pool.totalPerlStaked).toLocaleString()}
-                                </td>
+                                </td> */}
                                 <td>
                                     {Number(pool.rewardPer100PERL).toLocaleString()}
                                 </td>

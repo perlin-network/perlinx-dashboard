@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
+// eslint-disable-next-line
 import { Line, Pie } from 'react-chartjs-2';
 import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
@@ -7,7 +8,7 @@ import { colors, REWARD_PER_PERIOD } from "../../constants"
 import { PERIODS } from "../Main"
 import RewardCard from "./RewardCard"
 import GasCard from './GasCard';
-import { getDotColor , patterns} from "../../utils/colors"
+import { getDotColor, patterns } from "../../utils/colors"
 
 const Wrapper = styled.div`
     
@@ -69,7 +70,7 @@ const PoolLiquidity = styled.div`
 // const APYCard = styled(Card)`
 
 // `
-
+// eslint-disable-next-line
 const APYChartWrapper = styled.div`
     padding-top: 60px;
     @media only screen and (max-width: 600px) {
@@ -83,7 +84,7 @@ const Charts = ({ period }) => {
 
     const context = useContext(SnapshotContext);
     const { feed } = context.data;
-
+    // eslint-disable-next-line
     const { pieData, pieSideData, apyData } = useMemo(() => {
 
         let poolNames = [];
@@ -121,7 +122,7 @@ const Charts = ({ period }) => {
         try {
 
             const getRewardRate = (timestamp) => {
-                const isNew =  Number(timestamp)/1000 > 1601356148
+                const isNew = Number(timestamp) / 1000 > 1601356148
                 if (isNew) {
                     return REWARD_PER_PERIOD
                 } else {
@@ -221,7 +222,7 @@ const Charts = ({ period }) => {
     //     }
     // };
 
-    
+
 
     return (
         <Wrapper>
@@ -273,8 +274,8 @@ const Charts = ({ period }) => {
                         </Row>
                     </Card>
                 </StyledCol>
-                <StyledCol sm="6" className="d-none d-sm-block">
-                    <Card >
+                {/* <StyledCol sm="6" className="d-none d-sm-block">
+                    <Card>
                         <h3>Historical APY</h3>
                         <APYChartWrapper>
                             <Line
@@ -309,6 +310,11 @@ const Charts = ({ period }) => {
                             />
                         </APYChartWrapper>
                     </Card>
+                </StyledCol> */}
+                <StyledCol sm="6">
+                    <Card>
+                        <GasCard />
+                    </Card>
                 </StyledCol>
             </Row>
             <Row>
@@ -317,11 +323,7 @@ const Charts = ({ period }) => {
                         <RewardCard />
                     </Card>
                 </StyledCol>
-                <StyledCol sm="6">
-                    <Card>
-                        <GasCard />
-                    </Card>
-                </StyledCol>
+
             </Row>
         </Wrapper>
     )

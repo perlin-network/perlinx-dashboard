@@ -54,7 +54,7 @@ const Card = styled.div`
 
 const Stat = () => {
     const { data } = useContext(SnapshotContext);
-
+    // eslint-disable-next-line
     const { stat, feed, perlPrice, apy } = data;
 
     const { totalMinted, totalCollateral } = useMemo(() => {

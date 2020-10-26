@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useEffect } from 'react';
 import styled from "styled-components";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors, REWARD_PER_PERIOD } from "../../constants"
+import { colors } from "../../constants"
 import { getDotColor } from "../../utils/colors"
 
 const Wrapper = styled.div`
@@ -139,7 +139,7 @@ const PoolMetrics = () => {
                 apr
             }
         })
-
+        // eslint-disable-next-line
     }, [pools, totalLiquidity])
 
 

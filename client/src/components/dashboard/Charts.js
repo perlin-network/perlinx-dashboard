@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
+// eslint-disable-next-line
 import { Line, Pie } from 'react-chartjs-2';
 import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
@@ -69,7 +70,7 @@ const PoolLiquidity = styled.div`
 // const APYCard = styled(Card)`
 
 // `
-
+// eslint-disable-next-line
 const APYChartWrapper = styled.div`
     padding-top: 60px;
     @media only screen and (max-width: 600px) {
@@ -83,7 +84,7 @@ const Charts = ({ period }) => {
 
     const context = useContext(SnapshotContext);
     const { feed } = context.data;
-
+    // eslint-disable-next-line
     const { pieData, pieSideData, apyData } = useMemo(() => {
 
         let poolNames = [];

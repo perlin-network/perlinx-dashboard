@@ -100,7 +100,8 @@ const Stat = () => {
                     <Card>
                         <div>
                             <h3>Current APY</h3>
-                            <p>{apy.toFixed(2)}% </p>
+                            {/* <p>{apy.toFixed(2)}% </p> */}
+                            <p>TBC <span style={{fontSize: 10}}><br/>*See the table below</span></p>
                         </div>
                         <div style={{ paddingRight: 0 }}>
                             <h3>APY All-time high</h3>

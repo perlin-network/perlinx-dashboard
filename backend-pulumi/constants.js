@@ -25,43 +25,52 @@ exports.POOLS = [
         exchangeAddress: "0x2c1cb70cccf250b35ca2cb021e2f624aba76e3e8"
     },
     {
-        name : "PERL/pxUSD",
-        exchangeAddress : "0xce46dd186160c81b06433f9f501b06cd36d19d50"
+        name: "PERL/pxUSD",
+        exchangeAddress: "0xce46dd186160c81b06433f9f501b06cd36d19d50"
+    },
+    {
+        name : "PERL/pxUSD_Mar2021",
+        exchangeAddress : "0x01c1AdB4ad6678d2bf2B772301f111D257b7b109"
     }
 ]
 
 exports.COINGECKO_IDS = [
     {
-        symbol : "PERL",
-        id : "perlin"
+        symbol: "PERL",
+        id: "perlin"
     },
     {
-        symbol : "DAI",
-        id : "dai"
+        symbol: "DAI",
+        id: "dai"
     },
     {
-        symbol : "WETH",
-        id : "weth"
+        symbol: "WETH",
+        id: "weth"
     },
     {
-        symbol : "BAL",
-        id : "balancer"
+        symbol: "BAL",
+        id: "balancer"
     },
     {
-        symbol : "TUSD",
-        id : "true-usd"
+        symbol: "TUSD",
+        id: "true-usd"
     },
     {
-        symbol : "BUSD",
-        id : "binance-usd"
+        symbol: "BUSD",
+        id: "binance-usd"
     }
 ]
 
 exports.SYNTHS = [
     {
-        name : "pxUSD-OCT2020",
-        empAddress : "0x306b19502c833c1522fbc36c9dd7531eda35862b",
-        erc20Address : "0xdaff85b6f5787b2d9ee11ccdf5e852816063326a"
+        name: "pxUSD-OCT2020",
+        empAddress: "0x306b19502c833c1522fbc36c9dd7531eda35862b",
+        erc20Address: "0xdaff85b6f5787b2d9ee11ccdf5e852816063326a"
+    },
+    {
+        name: "pxUSD-MAR2021",
+        empAddress: "0x3a93e863cb3adc5910e6cea4d51f132e8666654f",
+        erc20Address: "0xf93340b1a3aDf7eedcAEc25Fae8171D4b736e89F"
     }
 ]
 

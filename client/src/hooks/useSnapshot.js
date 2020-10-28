@@ -73,7 +73,6 @@ const Provider = ({ children }) => {
                 // Latest reward calc. 
                 const totalPerlNormalized =  mostRecentEntry.pools.reduce((sum, item) => {
                     if (item.name.indexOf("pxUSD") !== -1) {
-                        console.log("hello..")
                         return sum + (Number(item.totalPerl) * 3)
                     } else {
                         return sum + Number(item.totalPerl)
@@ -85,9 +84,7 @@ const Provider = ({ children }) => {
                 }
 
                 const totalWeeklyRewardOct = ((totalPerlNormalized / 8) * (average([1,1,1,1,1,3])) * 2.4 / 52)
-            
                 
-
                 data = {
                     ...data,
                     perlPrice : (Number(mostRecentEntry.totalSize) / 2) / (Number(mostRecentEntry.totalPerlLiquidity)),

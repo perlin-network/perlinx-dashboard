@@ -6,7 +6,7 @@ import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
 import { colors, REWARD_PER_PERIOD } from "../../constants"
 import { PERIODS } from "../Main"
-import RewardCard from "./RewardCard"
+// import RewardCard from "./RewardCard"
 import GasCard from './GasCard';
 import { getDotColor, patterns } from "../../utils/colors"
 

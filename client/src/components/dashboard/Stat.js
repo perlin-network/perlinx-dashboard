@@ -61,9 +61,15 @@ const Stat = () => {
         try {
             const lastItem = feed?.data?.hourly[feed.data.hourly.length - 1]
             
+            let totalMinted = 0
+            let totalCollateral = 0
+            for (let synthetic of lastItem?.synthetics) {
+                totalMinted += Number(synthetic.totalMinted)
+                totalCollateral += Number(synthetic.totalCollateral) * (perlPrice || 0.03)
+            }
             return {
-                totalMinted: Number(lastItem?.synthetics[0]?.totalMinted),
-                totalCollateral : Number(lastItem?.synthetics[0]?.totalCollateral) * (perlPrice || 0.03)
+                totalMinted ,
+                totalCollateral
             }
         } catch (e) {
 

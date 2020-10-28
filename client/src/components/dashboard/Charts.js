@@ -317,14 +317,14 @@ const Charts = ({ period }) => {
                     </Card>
                 </StyledCol>
             </Row>
-            <Row>
+            {/* <Row>
                 <StyledCol sm="6">
                     <Card >
                         <RewardCard />
                     </Card>
                 </StyledCol>
 
-            </Row>
+            </Row> */}
         </Wrapper>
     )
 }

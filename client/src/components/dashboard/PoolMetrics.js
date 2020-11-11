@@ -115,15 +115,22 @@ const PoolMetrics = () => {
             const rawTotalShare = (Number(pool.totalPerl) / Number(totalLiquidity)) * 100
             const multiplier = getMultipler(pool.name)
             const totalShare =  ((Number(pool.totalPerl) * multiplier) / Number(totalPerlAfterMultiplied)) * 100
+            // hard-coded rewardAllocation / APR
+            let rewardAllocation = (totalShare / 100) * Number(context?.data?.totalWeeklyRewardOct)
+            let apr = 0.1
+            if (pool.name === "PERL/pxUSD") {
+                rewardAllocation = 0
+                apr = 0
+            }
 
-            // const rewardAllocation = (totalShare / 100) * Number(REWARD_PER_PERIOD)
-            // new reward calc. Oct onwards
-            const rewardAllocation = (totalShare / 100) * Number(context?.data?.totalWeeklyRewardOct)
             const rewardPer100PERL = (rewardAllocation / totalPerlStaked) * 100
-            const apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
-
+            // let apr = ((rewardAllocation/ (totalPerlStaked * 2)) * 52)
             
 
+            if (pool.name === "PERL/pxUSD_Mar2021") {
+                apr = 0.4
+            }
+            
             return {
                 name: pool.name,
                 totalBpt: pool.totalBpt,

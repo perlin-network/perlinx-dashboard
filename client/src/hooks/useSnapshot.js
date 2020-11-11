@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useReducer, createContext } from 'react';
 import axios from "axios"
 import { Spinner } from "reactstrap"
-import { API_ENDPOINT, REWARD_PER_PERIOD } from "../constants" 
+import { API_ENDPOINT, REWARD_PER_PERIOD } from "../constants"
 
 export const SnapshotContext = createContext({});
 
@@ -29,7 +29,7 @@ const Provider = ({ children }) => {
         },
         {
             isLoading: true,
-            rewardPerHundredPerl : {}
+            rewardPerHundredPerl: {}
         }
     )
 
@@ -50,7 +50,7 @@ const Provider = ({ children }) => {
             setRewardPerHundred: (value) => {
                 dispatch({ type: 'SET_REWARD', data: value });
             },
-            
+
             isLoading,
             data,
             rewardPerHundredPerl,
@@ -64,39 +64,55 @@ const Provider = ({ children }) => {
             const statResponse = await axios.get(`${API_ENDPOINT}/stat`)
             const feedResponse = await axios.get(`${API_ENDPOINT}/data`)
             let data = {
-                stat : statResponse.data,
-                feed : feedResponse.data
+                stat: statResponse.data,
+                feed: feedResponse.data
             }
             // Getting PERL price / APY from the most recent record
             try {
                 const mostRecentEntry = feedResponse.data.data.hourly[feedResponse.data.data.hourly.length - 1]
                 // Latest reward calc. 
-                const totalPerlNormalized =  mostRecentEntry.pools.reduce((sum, item) => {
-                    if (item.name.indexOf("pxUSD") !== -1) {
-                        return sum + (Number(item.totalPerl) * 3)
-                    } else {
-                        return sum + Number(item.totalPerl)
+                const totalPerl = mostRecentEntry.pools.reduce((sum, item) => sum + Number(item.totalPerl), 0)
+                const totalPerlLocked = mostRecentEntry.pools.reduce((sum, item) => {
+                    let totalPerlLocked = 0
+                    const bptFraction =  Number(item.bptInRewardContract) / Number(item.totalBpt)
+                    if (!isNaN(bptFraction)) {
+                        totalPerlLocked = bptFraction*item.totalPerl
                     }
-                },0)
-
-                const average = (nums) => {
-                    return nums.reduce((a, b) => (a + b)) / nums.length;
-                }
-
-                const totalWeeklyRewardOct = ((totalPerlNormalized / 8) * (average([1,1,1,1,1,3])) * 2.4 / 52)
+                    return sum + (totalPerlLocked)
+                }, 0)
                 
+                const averageApr = 0.2
+                // const average = (nums) => {
+                //     return nums.reduce((a, b) => (a + b)) / nums.length;
+                // }
+
+                // const averageApr = 0.2
+
+                // const totalPerlNormalized = mostRecentEntry.pools.reduce((sum, item) => {
+                //     console.log("item : ", item)
+                //     if (item.name.indexOf("pxUSD") !== -1) {
+                //         if (item.name === "PERL/pxUSD_Mar2021") {
+                //             return sum + (Number(item.totalPerl) * 4)
+                //         } else {
+                //             return sum
+                //         }
+                //     } else {
+                //         return sum + Number(item.totalPerl)
+                //     }
+                // }, 0)
+                // const totalWeeklyRewardOct = ((totalPerlNormalized / 8) * (average([1, 1, 1, 1, 1, 0, 4])) * 2.4 / 52)
                 data = {
                     ...data,
-                    perlPrice : (Number(mostRecentEntry.totalSize) / 2) / (Number(mostRecentEntry.totalPerlLiquidity)),
-                    apy : ((REWARD_PER_PERIOD / (Number(mostRecentEntry.totalPerlLiquidity) * 2)) * 52 * 100),
-                    totalWeeklyRewardOct
+                    perlPrice: (Number(mostRecentEntry.totalSize) / 2) / (Number(mostRecentEntry.totalPerlLiquidity)),
+                    apy: ((REWARD_PER_PERIOD / (Number(mostRecentEntry.totalPerlLiquidity) * 2)) * 52 * 100), // no longer used
+                    totalWeeklyRewardOct: (totalPerl-totalPerlLocked) * (2 * averageApr / 52)
                 }
 
             } catch (e) {
 
             }
-            
-            
+
+
             dispatch({ type: 'RESTORE_DATA', data });
         } catch (error) {
             alert("Server error ")
@@ -112,8 +128,8 @@ const Provider = ({ children }) => {
         <SnapshotContext.Provider value={snapshotContext}>
             <>
                 {isLoading ? (
-                    <div style={{ display : "flex", height: "100vh" }}>
-                        <Spinner color="light" style={{margin : "auto "}} />
+                    <div style={{ display: "flex", height: "100vh" }}>
+                        <Spinner color="light" style={{ margin: "auto " }} />
                     </div>
                 ) : (
                         children

@@ -53,9 +53,10 @@ const Card = styled.div`
 
 
 const Stat = () => {
-    const { data } = useContext(SnapshotContext);
+    const { data, tvl } = useContext(SnapshotContext);
     // eslint-disable-next-line
     const { stat, feed, perlPrice, apy } = data;
+    
 
     const { totalMinted, totalCollateral } = useMemo(() => {
         try {
@@ -89,7 +90,7 @@ const Stat = () => {
                     <Card>
                         <div style={{ width: "37.5%" }}>
                             <h3>Total Value Locked</h3>
-                            <p>${`${Number(stat.totalSize).toLocaleString()}`}</p>
+                            <p>${`${Number(tvl).toLocaleString()}`}</p>
                         </div>
                         <div style={{ width: "37.5%" }}>
                             <h3>Total Volume</h3>

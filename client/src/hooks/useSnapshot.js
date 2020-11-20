@@ -21,6 +21,11 @@ const Provider = ({ children }) => {
                         ...prevState,
                         rewardPerHundredPerl: action.data
                     }
+                case 'SET_TVL':
+                    return {
+                        ...prevState,
+                        tvl: action.data
+                    }
                 default:
                     return {
                         ...prevState
@@ -29,11 +34,12 @@ const Provider = ({ children }) => {
         },
         {
             isLoading: true,
-            rewardPerHundredPerl: {}
+            rewardPerHundredPerl: {},
+            tvl : 0
         }
     )
 
-    const { isLoading, data, rewardPerHundredPerl } = state;
+    const { isLoading, data, rewardPerHundredPerl, tvl } = state;
 
     const apy = data ? ((REWARD_PER_PERIOD / (data.stat.totalPerlStaked * 2)) * 52 * 100) : 0
 
@@ -50,13 +56,16 @@ const Provider = ({ children }) => {
             setRewardPerHundred: (value) => {
                 dispatch({ type: 'SET_REWARD', data: value });
             },
-
+            setTVL: (value) => {
+                dispatch({ type: 'SET_TVL', data: value });
+            },
             isLoading,
             data,
             rewardPerHundredPerl,
-            apy
+            apy,
+            tvl
         }),
-        [isLoading, data, rewardPerHundredPerl, apy]
+        [isLoading, data, rewardPerHundredPerl, apy, tvl]
     );
 
     const loadData = async () => {

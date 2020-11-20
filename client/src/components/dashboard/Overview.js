@@ -77,6 +77,7 @@ const Wrapper = styled.div`
 const Overview = ({ period }) => {
     const context = useContext(SnapshotContext);
     const { feed } = context.data;
+    const { setTVL } = context
 
 
     const chartData = useMemo(() => {
@@ -103,6 +104,12 @@ const Overview = ({ period }) => {
         // const labels = daily ? daily.map(item => new Date(Number(item.timestamp)).toLocaleDateString()) : []
         // const totalValueLockedData = daily ? daily.map(item => Number(item.totalSize)) : []
         // const totalVolumeData = daily ? daily.map(item => Number(item.volume)) : []
+
+        // looks for the latest TVL
+        if (totalValueLockedData[0]) {
+            setTVL(totalValueLockedData[totalValueLockedData.length - 1])
+        }
+
         return {
             labels: labels,
             datasets: [

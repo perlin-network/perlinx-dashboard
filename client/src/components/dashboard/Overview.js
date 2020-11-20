@@ -147,6 +147,7 @@ const Overview = ({ period }) => {
                 }
             ]
         };
+        // eslint-disable-next-line
     }, [feed, period])
 
 

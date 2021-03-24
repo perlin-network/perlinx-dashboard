@@ -312,7 +312,7 @@ const Charts = ({ period }) => {
                     </Card>
                 </StyledCol> */}
                 <StyledCol sm="6">
-                    <Card>
+                    <Card style={{ opacity : 0.4 }}>
                         <GasCard />
                     </Card>
                 </StyledCol>

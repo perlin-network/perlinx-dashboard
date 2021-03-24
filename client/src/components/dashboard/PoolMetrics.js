@@ -179,10 +179,9 @@ const PoolMetrics = () => {
                         <th>% Locked</th>
                         <th>PERL Liquidity</th>
                         <th>Share of total</th>
-                        <th>Rewards Allocated</th>
-                        {/* <th>PERL Staked</th> */}
+                        {/* <th>Rewards Allocated</th>
                         <th width="10%">PERL reward / 100 PERL staked</th>
-                        <th>APY</th>
+                        <th>APY</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -218,18 +217,15 @@ const PoolMetrics = () => {
                                 <td>
                                     {pool.rawTotalShare.toFixed(2)}%
                                 </td>
-                                <td>
+                                {/* <td>
                                     {Number(pool.rewardAllocation).toLocaleString()}
                                 </td>
-                                {/* <td>
-                                    {Number(pool.totalPerlStaked).toLocaleString()}
-                                </td> */}
                                 <td>
                                     {Number(pool.rewardPer100PERL).toLocaleString()}
                                 </td>
                                 <td>
                                     {(pool.apr * 100).toFixed(0)}%
-                                </td>
+                                </td> */}
                             </tr>
                         )
                     })

@@ -26,6 +26,11 @@ const Provider = ({ children }) => {
                         ...prevState,
                         tvl: action.data
                     }
+                case 'SET_XAU_PRICE':
+                    return {
+                        ...prevState,
+                        xauPrice: action.data
+                    }
                 default:
                     return {
                         ...prevState
@@ -35,11 +40,12 @@ const Provider = ({ children }) => {
         {
             isLoading: true,
             rewardPerHundredPerl: {},
-            tvl : 0
+            tvl : 0,
+            xauPrice: 0
         }
     )
 
-    const { isLoading, data, rewardPerHundredPerl, tvl } = state;
+    const { isLoading, data, rewardPerHundredPerl, tvl, xauPrice } = state;
 
     const apy = data ? ((REWARD_PER_PERIOD / (data.stat.totalPerlStaked * 2)) * 52 * 100) : 0
 
@@ -63,9 +69,10 @@ const Provider = ({ children }) => {
             data,
             rewardPerHundredPerl,
             apy,
-            tvl
+            tvl,
+            xauPrice
         }),
-        [isLoading, data, rewardPerHundredPerl, apy, tvl]
+        [isLoading, data, rewardPerHundredPerl, apy, tvl, xauPrice]
     );
 
     const loadData = async () => {
@@ -128,8 +135,21 @@ const Provider = ({ children }) => {
         }
     }
 
+    const checkXAUPrice = async () => {
+        try {
+            const { data } = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usdhttps://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usd`)
+            const price = data["0x45804880de22913dafe09f4980848ece6ecbaf78"]?.usd
+            if (price) {
+                dispatch({ type: 'SET_XAU_PRICE', data: price });
+            }
+        } catch (e) {
+            
+        }
+    }
+
     useEffect(() => {
         loadData();
+        checkXAUPrice()
     }, []);
 
 

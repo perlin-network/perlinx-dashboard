@@ -27,6 +27,7 @@ const Card = styled.div`
         padding-top: 10px;
         margin-top: auto;
         margin-bottom: auto;
+        text-align: center;
         :not(:last-child) {
             border-right: 1px solid rgba(255,255,255,0.3);
         }
@@ -53,85 +54,50 @@ const Card = styled.div`
 
 
 const Stat = () => {
-    const { data, tvl } = useContext(SnapshotContext);
+    const { data, tvl, xauPrice } = useContext(SnapshotContext);
     // eslint-disable-next-line
     const { stat, feed, perlPrice, apy } = data;
     
 
-    const { totalMinted, totalCollateral } = useMemo(() => {
+    const { totalCollateral , totalMintedValue } = useMemo(() => {
         try {
             const lastItem = feed?.data?.hourly[feed.data.hourly.length - 1]
             
-            let totalMinted = 0
             let totalCollateral = 0
+            let totalMintedValue = 0
             for (let synthetic of lastItem?.synthetics) {
-                totalMinted += Number(synthetic.totalMinted)
+                if ((synthetic.name).indexOf("pxGOLD") !== -1) {
+                    totalMintedValue += Number(synthetic.totalMinted) * (xauPrice || 1600)
+                }
+                if ((synthetic.name).indexOf("pxUSD") !== -1) {
+                    totalMintedValue += Number(synthetic.totalMinted)
+                }
+                // totalMinted += Number(synthetic.totalMinted)
                 totalCollateral += Number(synthetic.totalCollateral) * (perlPrice || 0.03)
             }
             return {
-                totalMinted ,
-                totalCollateral
+                totalCollateral,
+                totalMintedValue
             }
         } catch (e) {
 
         }
         return {
-            totalMinted : 0,
-            totalCollateral:  0
+            totalCollateral:  0,
+            totalMintedValue: 0
         }
     // }, [stat, feed])
-    }, [ feed, perlPrice])
+    }, [ feed, perlPrice, xauPrice])
     
 
     return (
         <Wrapper>
             <Row>
-                <Col sm="5">
-                    <Card>
-                        <div style={{ width: "37.5%" }}>
-                            <h3>Total Value Locked</h3>
-                            <p>${`${Number(tvl).toLocaleString()}`}</p>
-                        </div>
-                        <div style={{ width: "37.5%" }}>
-                            <h3>Total Volume</h3>
-                            <p>${`${Number(stat.volume).toLocaleString()}`}</p>
-                        </div>
-                        <div style={{ width: "25%" }}>
-                            <h3>Total Users</h3>
-                            <p>{stat.totalUsers}</p>
-                        </div>
-                    </Card>
-
-                </Col>
-                <Col sm="3">
+                <Col sm="6">
                     <Card>
                         <div>
-                            <h3>Current APY</h3>
-                            {/* <p>{apy.toFixed(2)}% </p> */}
-                            <p>TBC <span style={{fontSize: 10}}><br/>*See the table below</span></p>
-                        </div>
-                        <div style={{ paddingRight: 0 }}>
-                            <h3>APY All-time high</h3>
-                            <p>{ALL_TIME_HIGH_APY}%</p>
-                        </div>
-                    </Card>
-
-                </Col>
-                <Col sm="4">
-                    {/* <Card>
-                        <div>
-                            <h3>Current Rewards</h3>
-                            <p>{`${(Number(stat.currentReward)).toFixed(2)} PERL`}</p>
-                        </div>
-                        <div>
-                            <h3>Total PERL Rewards</h3>
-                            <p>{`${Number(1200000).toFixed(0)} PERL`}</p>
-                        </div>
-                    </Card> */}
-                    <Card>
-                        <div>
-                            <h3>Total Minted</h3>
-                            <p> {Math.floor(totalMinted).toLocaleString()} pxUSD</p>
+                            <h3>Minted Value</h3>
+                            <p> ${`${Number(totalMintedValue).toLocaleString()}`}</p>
                         </div>
                         <div>
                             <h3>Total Collateral</h3>
@@ -139,6 +105,19 @@ const Stat = () => {
                         </div>
                     </Card>
                 </Col>
+                <Col sm="6">
+                    <Card>
+                        <div style={{ width: "50%" }}>
+                            <h3>Total Value Locked</h3>
+                            <p>${`${Number(tvl).toLocaleString()}`}</p>
+                        </div>
+                        <div style={{ width: "50%" }}>
+                            <h3>Total Volume</h3>
+                            <p>${`${Number(stat.volume).toLocaleString()}`}</p>
+                        </div>
+                    </Card>
+                </Col>
+                
             </Row>
         </Wrapper>
     )

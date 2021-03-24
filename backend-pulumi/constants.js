@@ -31,6 +31,10 @@ exports.POOLS = [
     {
         name : "PERL/pxUSD_Mar2021",
         exchangeAddress : "0x01c1AdB4ad6678d2bf2B772301f111D257b7b109"
+    },
+    {
+        name : "PERL/pxGOLD_MAY2021",
+        exchangeAddress : "0x23ACc850b30A07dcD9fb87e36Da111B9B301B3e5"
     }
 ]
 
@@ -71,6 +75,16 @@ exports.SYNTHS = [
         name: "pxUSD-MAR2021",
         empAddress: "0x3a93e863cb3adc5910e6cea4d51f132e8666654f",
         erc20Address: "0xf93340b1a3aDf7eedcAEc25Fae8171D4b736e89F"
+    },
+    {
+        name : "pxGOLD-MAY2021",
+        empAddress: "0xD50fbace72352C2e15E0986b8Ad2599627B5c340",
+        erc20Address: "0x59fec83eC709c893aedD1A144Cf1828Eb04127Cd"
+    },
+    {
+        name : "pxGOLD-MAR2022",
+        empAddress: "0x46f5E363e69798a74c8422BFb9EDB63e3FB0f08a",
+        erc20Address: "0x5247C0DB4044FB6F97f32C7E1B48758019A5A912"
     }
 ]
 

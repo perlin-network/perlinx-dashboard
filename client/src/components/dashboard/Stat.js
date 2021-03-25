@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import styled from "styled-components";
 import { Row, Col } from "reactstrap";
 import { SnapshotContext } from "../../hooks/useSnapshot";
-import { colors, ALL_TIME_HIGH_APY } from "../../constants"
+import { colors } from "../../constants"
 
 const Wrapper = styled.div`
 

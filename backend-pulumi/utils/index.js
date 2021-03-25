@@ -92,3 +92,17 @@ exports.convertTimestampToBlocktime = async (provider, timestamp) => {
 
     return block.number;
 }
+
+
+exports.getXAUPrice = async () => {
+    try {
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usdhttps://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usd`)
+        const price = data["0x45804880de22913dafe09f4980848ece6ecbaf78"].usd
+        if (price) {
+            return price
+        }
+    } catch (e) {
+        
+    }
+    return 0
+}

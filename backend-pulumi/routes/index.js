@@ -4,7 +4,7 @@ const axios = require('axios');
 const { ethers } = require("ethers");
 const { ERC20_ABI, BALANCER_ABI, REWARD_ABI, EMP_ABI } = require("../abi");
 const { POOLS, PERL_ERC20, REWARD_CONTRACT, COINGECKO_IDS, INFURA_KEY, SYNTHS } = require("../constants");
-const { convertTimestampToBlocktime, getTokenLatestPrices, getTokenHistoricalPrice } = require("../utils");
+const { convertTimestampToBlocktime, getTokenLatestPrices, getTokenHistoricalPrice, getXAUPrice } = require("../utils");
 
 const getProvider = () => new ethers.providers.InfuraProvider("homestead", INFURA_KEY)
 
@@ -66,9 +66,12 @@ exports.snapshot = async (event) => {
                 const weight = await poolContract.getNormalizedWeight(tokenAddress);
                 
                 let currentPrice = 1
-                if (symbol.indexOf("pxUSD") === -1) {
+                if (symbol.indexOf("pxUSD") === -1 && symbol.indexOf("pxGOLD") === -1) {
                     const tokenId = COINGECKO_IDS.filter(item => item.symbol === symbol)[0].id;
                     currentPrice = priceData[tokenId].usd;
+                }
+                if (symbol.indexOf("pxGOLD") !== -1) {
+                    currentPrice = await getXAUPrice()
                 }
 
                 const balanceWei = await lockedToken.balanceOf(pool.exchangeAddress);

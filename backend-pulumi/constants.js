@@ -35,6 +35,14 @@ exports.POOLS = [
     {
         name : "PERL/pxGOLD_MAY2021",
         exchangeAddress : "0x23ACc850b30A07dcD9fb87e36Da111B9B301B3e5"
+    },
+    {
+        name : "pxUSD_MAR2022-USDC",
+        exchangeAddress : "0x3a0d62bca2f4062e8badfdc90701d1228487f741"
+    },
+    {
+        name : "pxGOLD-pxUSD(MAR2022)",
+        exchangeAddress :"0xb8676e16353497c8e8a71f343baf9679c7897b2f"
     }
 ]
 

@@ -98,28 +98,12 @@ const Provider = ({ children }) => {
                 }, 0)
                 
                 const averageApr = 0.2
-                // const average = (nums) => {
-                //     return nums.reduce((a, b) => (a + b)) / nums.length;
-                // }
+               
+                const perlPriceResponse = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=perlin%2Cdai&vs_currencies=usd")
 
-                // const averageApr = 0.2
-
-                // const totalPerlNormalized = mostRecentEntry.pools.reduce((sum, item) => {
-                //     console.log("item : ", item)
-                //     if (item.name.indexOf("pxUSD") !== -1) {
-                //         if (item.name === "PERL/pxUSD_Mar2021") {
-                //             return sum + (Number(item.totalPerl) * 4)
-                //         } else {
-                //             return sum
-                //         }
-                //     } else {
-                //         return sum + Number(item.totalPerl)
-                //     }
-                // }, 0)
-                // const totalWeeklyRewardOct = ((totalPerlNormalized / 8) * (average([1, 1, 1, 1, 1, 0, 4])) * 2.4 / 52)
                 data = {
                     ...data,
-                    perlPrice: (Number(mostRecentEntry.totalSize) / 2) / (Number(mostRecentEntry.totalPerlLiquidity)),
+                    perlPrice: perlPriceResponse?.data?.perlin?.usd,
                     apy: ((REWARD_PER_PERIOD / (Number(mostRecentEntry.totalPerlLiquidity) * 2)) * 52 * 100), // no longer used
                     totalWeeklyRewardOct: (totalPerl-totalPerlLocked) * (2 * averageApr / 52)
                 }
@@ -138,7 +122,7 @@ const Provider = ({ children }) => {
     const checkXAUPrice = async () => {
         try {
             const { data } = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usdhttps://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x45804880de22913dafe09f4980848ece6ecbaf78&vs_currencies=usd`)
-            const price = data["0x45804880de22913dafe09f4980848ece6ecbaf78"]?.usd
+            const price = data["0x45804880de22913dafe09f4980848ece6ecbaf78"]?.usd 
             if (price) {
                 dispatch({ type: 'SET_XAU_PRICE', data: price });
             }
